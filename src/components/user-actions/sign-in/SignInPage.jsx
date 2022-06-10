@@ -21,11 +21,11 @@ import {
 
 const BASE_API_URL = 'http://localhost:8080/api/auth';
 
-const SignInPage = () => {
-  const [input, setInput] = useState({
-    username: '',
-    password: '',
-  });
+const SignInPage = ({ input, setInput, setJwtToken }) => {
+  // const [input, setInput] = useState({
+  //   username: '',
+  //   password: '',
+  // });
   const [message, setMessage] = useState({ message: '' });
   // eslint-disable-next-line no-unused-vars
   // const navigate = useNavigate();
@@ -48,17 +48,20 @@ const SignInPage = () => {
         username,
         password,
       });
-      console.log(response);
-
-      if (response.data !== null && response.data.token !== null) {
-        // localStorage.setItem('user', response.data);
-        // localStorage.setItem('id', response.data.id);
-        localStorage.setItem('token', response.data.token);
-        console.log(
-          `local storage token set to: ${localStorage.getItem('token')}`
-        );
-        // navigate.go('/');
+      console.log(response.data);
+      if (response.status === 200) {
+        setJwtToken(response.data.token);
       }
+
+      // if (response.data !== null && response.data.token !== null) {
+      //   // localStorage.setItem('user', response.data);
+      //   // localStorage.setItem('id', response.data.id);
+      //   localStorage.setItem('token', response.data.token);
+      //   console.log(
+      //     `local storage token set to: ${localStorage.getItem('token')}`
+      //   );
+
+      // }
     } catch (err) {
       setMessage(err);
       console.log(err);

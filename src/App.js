@@ -4,21 +4,19 @@ import SignInPage from './components/user-actions/sign-in/SignInPage';
 
 const App = () => {
   const [jwtToken, setJwtToken] = useState('');
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [email, setEmail] = useState('');
-
+  const [input, setInput] = useState({
+    username: '',
+    password: '',
+  });
   return (
     <div>
-      {' '}
       {jwtToken !== '' ? (
         <Layout />
       ) : (
         <SignInPage
-          username={username}
-          setUsername={setUsername}
-          password={password}
-          setPassword={setPassword}
+          input={input}
+          setInput={setInput}
+          setJwtToken={setJwtToken}
         />
       )}
     </div>
