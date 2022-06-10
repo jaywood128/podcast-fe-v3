@@ -1,13 +1,8 @@
 /* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import authServices from '../../../services/auth.services';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-// import { useNavigate } from 'react-router-dom';
-import {
-  UserActionLink,
-  UserActionsContainer,
-} from '../links/UserActionsLinkStyles';
 import {
   ErrorMessageStyles,
   FormContainerStyles,
@@ -19,13 +14,7 @@ import {
   SignInContainerStyles,
 } from './SignInPageContainerStyles';
 
-const BASE_API_URL = 'http://localhost:8080/api/auth';
-
 const SignInPage = ({ input, setInput, setJwtToken }) => {
-  // const [input, setInput] = useState({
-  //   username: '',
-  //   password: '',
-  // });
   const [message, setMessage] = useState({ message: '' });
   // eslint-disable-next-line no-unused-vars
   // const navigate = useNavigate();
@@ -41,33 +30,6 @@ const SignInPage = ({ input, setInput, setJwtToken }) => {
     return '';
   };
 
-  // eslint-disable-next-line no-unused-vars
-  const submitLogin = async (username, password) => {
-    try {
-      const response = await axios.post(`${BASE_API_URL}/sign-in`, {
-        username,
-        password,
-      });
-      console.log(response.data);
-      if (response.status === 200) {
-        setJwtToken(response.data.token);
-      }
-
-      // if (response.data !== null && response.data.token !== null) {
-      //   // localStorage.setItem('user', response.data);
-      //   // localStorage.setItem('id', response.data.id);
-      //   localStorage.setItem('token', response.data.token);
-      //   console.log(
-      //     `local storage token set to: ${localStorage.getItem('token')}`
-      //   );
-
-      // }
-    } catch (err) {
-      setMessage(err);
-      console.log(err);
-    }
-  };
-
   const submitSignIn = (e) => {
     e.preventDefault();
 
@@ -76,29 +38,37 @@ const SignInPage = ({ input, setInput, setJwtToken }) => {
       localStorage.removeItem('token');
     }
 
-    // if (localStorage.getItem('user') !== null) {
-    //   console.log('Removing previous user');
-    //   localStorage.removeItem('user');
-    //   console.log(`After removing user: " + ${localStorage.getItem('user')}`);
-    // }
-    console.log(input);
-    if (input.username !== null && input.username) {
-      submitLogin(input.username, input.password);
+    if (localStorage.getItem('user') !== null) {
+      console.log('Removing previous user');
+      localStorage.removeItem('user');
+      console.log(`After removing user: " + ${localStorage.getItem('user')}`);
     }
-    // authService.login(input.username, input.password).then(
-    //   (response) => {
-    //     console.log(response);
-    //   },
-    //   (err) => {
-    //     const resMessage =
-    //       (err.response && err.response.data && err.response.data.message) ||
-    //       err.message ||
-    //       err.response.data.message;
-    //     console.log(resMessage);
-    //     setMessage({ message: resMessage });
-    //     console.log(message);
-    //   }
-    // );
+
+    console.log(input);
+    /* 
+    Username and passwoird validation should be replaced with react form validation
+     */
+    if (input.username !== null && input.username) {
+      authServices.login(input.username, input.password).then(
+        (response) => {
+          console.log(response.status);
+          if (response.status === 200 && response.data.token) {
+            console.log('inside');
+            setJwtToken(response.data.token);
+            localStorage.setItem('token', response.data.token);
+          }
+        },
+        (err) => {
+          const resMessage =
+            (err.response && err.response.data && err.response.data.message) ||
+            err.message ||
+            err.response.data.message;
+          console.log(resMessage);
+          setMessage({ message: resMessage });
+          console.log(message);
+        }
+      );
+    }
   };
 
   const handleInputChange = (e) => {
