@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Layout from './components/Layout';
-import SignInPage from './components/user-actions/sign-in/SignInPage';
+import SignIn from './components/user-actions/sign-in/SignIn';
+import SignUp from './components/user-actions/sign-up/SignUp';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 const App = () => {
   const [jwtToken, setJwtToken] = useState('');
@@ -9,17 +11,24 @@ const App = () => {
     password: '',
   });
   return (
-    <div>
+    <>
       {jwtToken !== '' ? (
         <Layout />
       ) : (
-        <SignInPage
-          input={input}
-          setInput={setInput}
-          setJwtToken={setJwtToken}
-        />
+        <>
+          <Router>
+            <Routes>
+              <Route path="/sign-up" element={<SignUp />} />
+            </Routes>
+            <SignIn
+              input={input}
+              setInput={setInput}
+              setJwtToken={setJwtToken}
+            />
+          </Router>
+        </>
       )}
-    </div>
+    </>
   );
 };
 

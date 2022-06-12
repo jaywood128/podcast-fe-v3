@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import authServices from '../../../services/auth.services';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
@@ -12,9 +13,13 @@ import {
   InputStyles,
   SignInTitleStyles,
   SignInContainerStyles,
-} from './SignInPageContainerStyles';
+} from './SignInContainerStyles';
+import {
+  UserActionsContainer,
+  UserActionLink,
+} from '../links/UserActionsLinkStyles';
 
-const SignInPage = ({ input, setInput, setJwtToken }) => {
+const SignIn = ({ input, setInput, setJwtToken }) => {
   const [message, setMessage] = useState({ message: '' });
   // eslint-disable-next-line no-unused-vars
   // const navigate = useNavigate();
@@ -84,12 +89,12 @@ const SignInPage = ({ input, setInput, setJwtToken }) => {
 
   return (
     <SignInContainerStyles>
+      {displayErrorMessage()}
+      <SignInTitleStyles>
+        <h2 style={{ width: '100%', textAlign: 'center' }}>Sign in</h2>
+        <FontAwesomeIcon icon={faUser} size="lg" />
+      </SignInTitleStyles>
       <FormContainerStyles onSubmit={(e) => submitSignIn(e)}>
-        {displayErrorMessage()}
-        <SignInTitleStyles>
-          <FontAwesomeIcon icon={faUser} size="lg" />
-          <h2 style={{ width: '100%', textAlign: 'center' }}>Login</h2>
-        </SignInTitleStyles>
         <InputWrapContainer>
           <InputStyles
             type="text"
@@ -100,6 +105,7 @@ const SignInPage = ({ input, setInput, setJwtToken }) => {
             required
             size="40"
           />
+          <label>Username</label>
         </InputWrapContainer>
         <InputWrapContainer>
           <InputStyles
@@ -109,19 +115,23 @@ const SignInPage = ({ input, setInput, setJwtToken }) => {
             onChange={(e) => handleInputChange(e)}
             value={input.password}
             size="40"
+            required
           />
+          <label>Password</label>
         </InputWrapContainer>
         <SignInButtonContainer>
           <SignInButtonStyles type="submit">Sign in</SignInButtonStyles>
         </SignInButtonContainer>
-        {/* <UserActionsContainer>
-        <UserActionLink to="/sign-up">
+        <UserActionsContainer>
+          Not a member?
+          {/* <UserActionLink to="/sign-up"> */}
+          <Link to="sign-up">Sign up</Link>
           <i className="fas fa-user-plus" />
-        </UserActionLink>
-      </UserActionsContainer> */}
+          {/* </UserActionLink> */}
+        </UserActionsContainer>
       </FormContainerStyles>
     </SignInContainerStyles>
   );
 };
 
-export default SignInPage;
+export default SignIn;

@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 const SignInContainerStyles = styled.div`
-  overflow: auto;
   background-color: #282828;
+  border: solid 1px white;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,13 +10,10 @@ const SignInContainerStyles = styled.div`
   height: 100vh;
   width: 100vw;
   font-family: 'Roboto Mono' monospace;
-  ::-webkit-scrollbar {
-    display: none;
-  }
 `;
 const InputWrapContainer = styled.div`
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   width: 20%;
   height: 10%;
   justify-content: center;
@@ -86,7 +83,7 @@ const FormContainerStyles = styled.form`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 70%;
+  height: 50%;
   flex-wrap: wrap;
   font-family: Roboto Mono;
   color: white;
