@@ -18,7 +18,7 @@ const UserActionsContainer = styled.div`
 previous name StyledUserLink 
  */
 
-const UserActionLink = styled(Link)`
+const UserActionLink = styled.button`
   color: white;
   background-color: #181818;
   text-align: center;
