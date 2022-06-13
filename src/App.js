@@ -4,6 +4,16 @@ import SignIn from './components/user-actions/sign-in/SignIn';
 import SignUp from './components/user-actions/sign-up/SignUp';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
+import { createGlobalStyle } from 'styled-components';
+
+const GlobalStyle = createGlobalStyle`
+  * {
+    /* box-sizing: border-box; */
+    margin: 0;
+    padding: 0;
+  }
+`;
+
 const App = () => {
   // const tokenCheck = localStorage.getItem('token');
   const [jwtToken, setJwtToken] = useState('');
@@ -11,6 +21,8 @@ const App = () => {
     username: '',
     password: '',
   });
+  const [isSignInButtonActive, setIsSignInButtonActive] = useState(false);
+  const [isSignUpButtonActive, setIsSignUpButtonActive] = useState(false);
 
   useEffect(() => {
     if (
@@ -27,15 +39,35 @@ const App = () => {
         <Layout input={input} setInput={setInput} setJwtToken={setJwtToken} />
       ) : (
         <>
+          <GlobalStyle />
           <Router>
             <Routes>
-              <Route path="/sign-up" element={<SignUp />} />
+              <Route
+                path="/sign-up"
+                element={
+                  <SignUp
+                    isSignUpButtonActive={isSignUpButtonActive}
+                    setIsSignUpButtonActive={setIsSignUpButtonActive}
+                    isSignInButtonActive={isSignInButtonActive}
+                    setIsSignInButtonActive={setIsSignInButtonActive}
+                  />
+                }
+              />
+              <Route
+                path="/sign-in"
+                element={
+                  <SignIn
+                    input={input}
+                    setInput={setInput}
+                    setJwtToken={setJwtToken}
+                    isSignInButtonActive={isSignInButtonActive}
+                    setIsSignInButtonActive={setIsSignInButtonActive}
+                    isSignUpButtonActive={isSignUpButtonActive}
+                    setIsSignUpButtonActive={setIsSignUpButtonActive}
+                  />
+                }
+              />
             </Routes>
-            <SignIn
-              input={input}
-              setInput={setInput}
-              setJwtToken={setJwtToken}
-            />
           </Router>
         </>
       )}

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const SignInContainerStyles = styled.div`
   background-color: #282828;
@@ -13,30 +14,27 @@ const SignInContainerStyles = styled.div`
 `;
 const InputWrapContainer = styled.div`
   display: flex;
-  /* flex-direction: column; */
-  width: 20%;
-  height: 10%;
+  width: 70%;
+  height: 12%;
   justify-content: center;
   align-items: center;
   margin: 0px;
-  padding: 5px;
+  padding: 0px;
 `;
 
 const SignInButtonContainer = styled.div`
   display: flex;
   justify-content: center;
-  /* background-color: #282828; */
-  background-color: indigo;
-  height: 7%;
+  height: 9%;
   margin-top: 20px;
-  width: 20%;
+  width: 70%;
 `;
 
 const SignInButtonStyles = styled.button`
   border: none;
   padding: 10px 0px;
   background: none;
-  font-size: 16px;
+  font-size: 18px;
   background-color: #03a9f4;
   height: 100%;
   width: 100%;
@@ -57,14 +55,14 @@ const BreakStylesContainer = styled.div`
 
 const InputStyles = styled.input`
   height: 15%;
-  width: 90%;
+  width: 100%;
   font-size: 16px;
-  background: transparent;
   padding: 20px;
   border: none;
   outline: none;
-  border-bottom: 1px solid white;
-  color: white;
+  border: 1px solid #404040;
+  border-radius: 5px;
+  color: black;
 `;
 
 const SignInTitleStyles = styled.div`
@@ -75,19 +73,23 @@ const SignInTitleStyles = styled.div`
   color: white;
   font-size: 24px;
   padding-top: 10px;
+  margin-bottom: 20px;
 `;
 
 const FormContainerStyles = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background-color: #404040;
   align-items: center;
-  width: 100%;
-  height: 50%;
+  width: 26%;
+  height: 65%;
   flex-wrap: wrap;
   font-family: Roboto Mono;
   color: white;
-  background-color: indigo;
+  border-radius: 5px;
+  border: solid 0.5px white;
+  box-shadow: 1px 1px #b3b3b3;
 `;
 
 const ErrorMessageStyles = styled.div`
@@ -102,6 +104,24 @@ const ErrorMessageStyles = styled.div`
   font-size: 16px;
 `;
 
+const UserActionCard = styled(Link)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  width: 50%;
+  height: 50%;
+  border: solid 1px white;
+  text-align: center;
+  text-decoration: none;
+
+  &:active,
+  &:hover {
+    color: black;
+    background-color: #03a9f4;
+  }
+`;
+
 export {
   SignInContainerStyles,
   InputWrapContainer,
@@ -112,4 +132,5 @@ export {
   FormContainerStyles,
   ErrorMessageStyles,
   SignInTitleStyles,
+  UserActionCard,
 };

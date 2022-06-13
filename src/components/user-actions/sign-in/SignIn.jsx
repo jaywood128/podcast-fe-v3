@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import authServices from '../../../services/auth.services';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
@@ -13,16 +12,24 @@ import {
   InputStyles,
   SignInTitleStyles,
   SignInContainerStyles,
+  UserActionCard,
 } from './SignInContainerStyles';
 import {
   UserActionsContainer,
   UserActionLink,
 } from '../links/UserActionsLinkStyles';
+// import { SignUpButton } from './SignInContainerStyles';
 
-const SignIn = ({ input, setInput, setJwtToken }) => {
+const SignIn = ({
+  input,
+  setInput,
+  setJwtToken,
+  isSignInButtonActive,
+  setIsSignInButtonActive,
+  isSignUpButtonActive,
+  setIsSignUpButtonActive,
+}) => {
   const [message, setMessage] = useState({ message: '' });
-  // eslint-disable-next-line no-unused-vars
-  // const navigate = useNavigate();
 
   const displayErrorMessage = () => {
     if (message.message.includes('401')) {
@@ -84,17 +91,69 @@ const SignIn = ({ input, setInput, setJwtToken }) => {
       [e.target.name]: e.target.value,
     }));
   };
+  const onSignInButtonClick = () => {
+    setIsSignInButtonActive((isSignInButtonActive) => !isSignInButtonActive);
+    // setIsSignUpButtonActive((isSignUpButtonActive) => !isSignUpButtonActive);
+  };
+
+  const onSignUpButtonClick = () => {
+    setIsSignUpButtonActive((isSignUpButtonActive) => !isSignUpButtonActive);
+    setIsSignInButtonActive((isSignInButtonActive) => !isSignInButtonActive);
+  };
 
   useEffect(() => {}, [message.message]);
 
   return (
     <SignInContainerStyles>
       {displayErrorMessage()}
-      <SignInTitleStyles>
-        <h2 style={{ width: '100%', textAlign: 'center' }}>Sign in</h2>
-        <FontAwesomeIcon icon={faUser} size="lg" />
-      </SignInTitleStyles>
+
       <FormContainerStyles onSubmit={(e) => submitSignIn(e)}>
+        <SignInTitleStyles>
+          <h2
+            style={{
+              width: '100%',
+              textAlign: 'center',
+              font: 'black',
+              marginBottom: '10px',
+            }}
+          >
+            Sign-in
+          </h2>
+          <FontAwesomeIcon icon={faUser} size="lg" />
+        </SignInTitleStyles>
+        <div
+          style={{
+            display: 'flex',
+            height: '15%',
+            width: '70%',
+            justifyContent: 'center',
+            alignItems: 'center',
+            fontSize: '20px',
+          }}
+        >
+          <UserActionCard
+            onClick={onSignInButtonClick}
+            style={{
+              backgroundColor: isSignInButtonActive ? ' #03a9f4' : '',
+              color: isSignInButtonActive ? 'white' : '',
+            }}
+            to="/sign-in"
+          >
+            Sign-in
+          </UserActionCard>
+
+          <UserActionCard
+            onClick={onSignUpButtonClick}
+            style={{
+              backgroundColor: isSignUpButtonActive ? ' #03a9f4' : '',
+              color: isSignUpButtonActive ? 'white' : '',
+            }}
+            to="/sign-up"
+          >
+            Sign-up
+          </UserActionCard>
+        </div>
+
         <InputWrapContainer>
           <InputStyles
             type="text"
@@ -105,7 +164,6 @@ const SignIn = ({ input, setInput, setJwtToken }) => {
             required
             size="40"
           />
-          <label>Username</label>
         </InputWrapContainer>
         <InputWrapContainer>
           <InputStyles
@@ -117,17 +175,15 @@ const SignIn = ({ input, setInput, setJwtToken }) => {
             size="40"
             required
           />
-          <label>Password</label>
         </InputWrapContainer>
         <SignInButtonContainer>
           <SignInButtonStyles type="submit">Sign in</SignInButtonStyles>
         </SignInButtonContainer>
         <UserActionsContainer>
           Not a member?
-          {/* <UserActionLink to="/sign-up"> */}
-          <Link to="sign-up">Sign up</Link>
-          <i className="fas fa-user-plus" />
-          {/* </UserActionLink> */}
+          <UserActionLink to="/sign-up">
+            Sign up <i className="fas fa-user-plus" />
+          </UserActionLink>
         </UserActionsContainer>
       </FormContainerStyles>
     </SignInContainerStyles>
