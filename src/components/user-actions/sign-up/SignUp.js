@@ -18,7 +18,7 @@ const SignUpPage = ({
 }) => {
   // eslint-disable-next-line no-unused-vars
   const [loading, setLoading] = useState('');
-  const [input, setInput] = useState({
+  const [signInInput, setSignInInput] = useState({
     name: '',
     username: '',
     email: '',
@@ -30,17 +30,17 @@ const SignUpPage = ({
 
   async function postFormFetch() {
     // eslint-disable-next-line no-console
-    console.log(input);
+    console.log(signInInput);
     // const settings = {
     //   method: "POST",
     //   headers: {
     //     Accept: "application/json",
     //     "Content-Type": "application/json",
     //   },
-    //   body: JSON.stringify(input),
+    //   body: JSON.stringify(signInInput),
     // };
     // // eslint-disable-next-line no-console
-    // console.log(JSON.stringify(input));
+    // console.log(JSON.stringify(signInInput));
     // try {
     //   setLoading("true");
     //   const response = await fetch(
@@ -57,11 +57,16 @@ const SignUpPage = ({
     //   return error;
     // }
     authService
-      .register(input.name, input.username, input.email, input.password)
+      .register(
+        signInInput.name,
+        signInInput.username,
+        signInInput.email,
+        signInInput.password
+      )
       .then(
         () => {
           // eslint-disable-next-line no-console
-          console.log(`Submitted username ${input.username}`);
+          console.log(`Submitted username ${signInInput.username}`);
           // history.push('/');
           // window.location.reload();
         },
@@ -82,8 +87,8 @@ const SignUpPage = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // alert(input);
-    if (input.password.length < 6 || input.password.length > 40) {
+    // alert(signInInput);
+    if (signInInput.password.length < 6 || signInInput.password.length > 40) {
       setPasswordInputError('Password must be between 6 and 40 characters');
       return;
     }
@@ -92,7 +97,7 @@ const SignUpPage = ({
 
   const handleInputChange = (e) => {
     e.persist();
-    setInput((userInput) => ({
+    setSignInInput((userInput) => ({
       ...userInput,
       [e.target.name]: e.target.value,
     }));
@@ -124,7 +129,7 @@ const SignUpPage = ({
           }}
         >
           <UserActionCard
-            onClick={onSignInButtonClick}
+            // onClick={onSignInButtonClick}
             style={{
               backgroundColor: isSignInButtonActive ? ' #03a9f4' : '',
               color: isSignInButtonActive ? 'white' : '',
@@ -135,7 +140,7 @@ const SignUpPage = ({
           </UserActionCard>
 
           <UserActionCard
-            onClick={onSignUpButtonClick}
+            // onClick={onSignUpButtonClick}
             style={{
               backgroundColor: isSignUpButtonActive ? ' #03a9f4' : '',
               color: isSignUpButtonActive ? 'white' : '',
@@ -151,7 +156,7 @@ const SignUpPage = ({
             name="name"
             placeholder="Your Name"
             onChange={(e) => handleInputChange(e)}
-            value={input.name}
+            value={signInInput.name}
             required
             size="40"
           />
@@ -162,7 +167,7 @@ const SignUpPage = ({
             name="username"
             placeholder="Username"
             onChange={(e) => handleInputChange(e)}
-            value={input.username}
+            value={signInInput.username}
             required
             size="40"
           />
@@ -173,7 +178,7 @@ const SignUpPage = ({
             type="email"
             name="email"
             onChange={(e) => handleInputChange(e)}
-            value={input.email}
+            value={signInInput.email}
             required
             placeholder="Email"
             size="40"
@@ -185,7 +190,7 @@ const SignUpPage = ({
             name="password"
             placeholder="Password"
             onChange={(e) => handleInputChange(e)}
-            value={input.value}
+            value={signInInput.value}
             size="40"
           />
         </InputWrapContainer>

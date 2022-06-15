@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 
 const SignInContainerStyles = styled.div`
   background-color: #282828;
@@ -104,16 +103,18 @@ const ErrorMessageStyles = styled.div`
   font-size: 16px;
 `;
 
-const UserActionCard = styled(Link)`
+const UserActionCard = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   color: white;
-  width: 50%;
-  height: 50%;
-  border: solid 1px white;
+  width: 20%;
+  height: 30%;
+  border: solid 1.5px #03a9f4;
   text-align: center;
   text-decoration: none;
+  border-radius: 3px;
+  padding: 5px;
 
   &:active,
   &:hover {

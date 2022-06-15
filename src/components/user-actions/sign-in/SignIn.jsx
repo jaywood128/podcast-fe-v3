@@ -21,11 +21,11 @@ import {
 // import { SignUpButton } from './SignInContainerStyles';
 
 const SignIn = ({
-  input,
-  setInput,
+  signInInput,
+  setSignInInput,
   setJwtToken,
   isSignInButtonActive,
-  setIsSignInButtonActive,
+  // setIsSignInButtonActive,
   isSignUpButtonActive,
   setIsSignUpButtonActive,
 }) => {
@@ -56,12 +56,12 @@ const SignIn = ({
       console.log(`After removing user: " + ${localStorage.getItem('user')}`);
     }
 
-    console.log(input);
+    console.log(signInInput);
     /* 
     Username and passwoird validation should be replaced with react form validation
      */
-    if (input.username !== null && input.username) {
-      authServices.login(input.username, input.password).then(
+    if (signInInput.username !== null && signInInput.username) {
+      authServices.login(signInInput.username, signInInput.password).then(
         (response) => {
           console.log(response.status);
           if (response.status === 200 && response.data.token) {
@@ -86,22 +86,30 @@ const SignIn = ({
   const handleInputChange = (e) => {
     e.persist();
 
-    setInput((userInput) => ({
+    setSignInInput((userInput) => ({
       ...userInput,
       [e.target.name]: e.target.value,
     }));
   };
   const onSignInButtonClick = () => {
-    setIsSignInButtonActive((isSignInButtonActive) => !isSignInButtonActive);
-    // setIsSignUpButtonActive((isSignUpButtonActive) => !isSignUpButtonActive);
+    // console.log(isSignInButtonActive);
+    // if (!isSignInButtonActive) {
+    //   setIsSignInButtonActive((isSignInButtonActive) => !isSignInButtonActive);
+    // }
   };
 
   const onSignUpButtonClick = () => {
-    setIsSignUpButtonActive((isSignUpButtonActive) => !isSignUpButtonActive);
-    setIsSignInButtonActive((isSignInButtonActive) => !isSignInButtonActive);
+    console.log(isSignUpButtonActive);
+    if (!isSignInButtonActive) {
+      setIsSignUpButtonActive((isSignUpButtonActive) => !isSignUpButtonActive);
+    }
   };
 
-  useEffect(() => {}, [message.message]);
+  useEffect(() => {
+    // setIsSignInButtonActive(true);
+    // console.log(testProp);
+    // console.log(isSignInButtonActive);
+  }, [message.message]);
 
   return (
     <SignInContainerStyles>
@@ -115,17 +123,18 @@ const SignIn = ({
               textAlign: 'center',
               font: 'black',
               marginBottom: '10px',
+              fontSize: '1.2rem',
             }}
           >
             Sign-in
           </h2>
-          <FontAwesomeIcon icon={faUser} size="lg" />
+          <FontAwesomeIcon icon={faUser} size="4x" />
         </SignInTitleStyles>
         <div
           style={{
             display: 'flex',
             height: '15%',
-            width: '70%',
+            width: '100%',
             justifyContent: 'center',
             alignItems: 'center',
             fontSize: '20px',
@@ -134,10 +143,9 @@ const SignIn = ({
           <UserActionCard
             onClick={onSignInButtonClick}
             style={{
-              backgroundColor: isSignInButtonActive ? ' #03a9f4' : '',
+              backgroundColor: isSignInButtonActive ? ' #052CA3' : '',
               color: isSignInButtonActive ? 'white' : '',
             }}
-            to="/sign-in"
           >
             Sign-in
           </UserActionCard>
@@ -145,10 +153,9 @@ const SignIn = ({
           <UserActionCard
             onClick={onSignUpButtonClick}
             style={{
-              backgroundColor: isSignUpButtonActive ? ' #03a9f4' : '',
+              backgroundColor: isSignUpButtonActive ? ' #052CA3' : '',
               color: isSignUpButtonActive ? 'white' : '',
             }}
-            to="/sign-up"
           >
             Sign-up
           </UserActionCard>
@@ -160,7 +167,7 @@ const SignIn = ({
             name="username"
             placeholder="username"
             onChange={(e) => handleInputChange(e)}
-            value={input.username}
+            value={signInInput.username}
             required
             size="40"
           />
@@ -171,7 +178,7 @@ const SignIn = ({
             name="password"
             placeholder="password"
             onChange={(e) => handleInputChange(e)}
-            value={input.password}
+            value={signInInput.password}
             size="40"
             required
           />

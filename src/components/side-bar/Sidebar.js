@@ -20,7 +20,7 @@ import { useNavigate } from 'react-router-dom';
 const logout = () => {
   AuthService.logout();
 };
-const Sidebar = ({ input, setInput, jwtToken, setJwtToken }) => {
+const Sidebar = ({ signInInput, setSignInInput, jwtToken, setJwtToken }) => {
   let navigate = useNavigate();
 
   return (

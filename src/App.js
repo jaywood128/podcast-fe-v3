@@ -5,6 +5,7 @@ import SignUp from './components/user-actions/sign-up/SignUp';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import { createGlobalStyle } from 'styled-components';
+import SignInSignUpContainer from './components/authenticaton/SignInSignUpContainer';
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -17,8 +18,14 @@ const GlobalStyle = createGlobalStyle`
 const App = () => {
   // const tokenCheck = localStorage.getItem('token');
   const [jwtToken, setJwtToken] = useState('');
-  const [input, setInput] = useState({
+  const [signInInput, setSignInInput] = useState({
     username: '',
+    password: '',
+  });
+  const [signUpInput, setSignUpInput] = useState({
+    name: '',
+    username: '',
+    email: '',
     password: '',
   });
   const [isSignInButtonActive, setIsSignInButtonActive] = useState(false);
@@ -36,34 +43,29 @@ const App = () => {
   return (
     <>
       {jwtToken !== '' ? (
-        <Layout input={input} setInput={setInput} setJwtToken={setJwtToken} />
+        <Layout
+          signInInput={signInInput}
+          setSignInInput={setSignInInput}
+          setJwtToken={setJwtToken}
+        />
       ) : (
         <>
           <GlobalStyle />
           <Router>
             <Routes>
               <Route
-                path="/sign-up"
+                path="/"
                 element={
-                  <SignUp
-                    isSignUpButtonActive={isSignUpButtonActive}
-                    setIsSignUpButtonActive={setIsSignUpButtonActive}
-                    isSignInButtonActive={isSignInButtonActive}
-                    setIsSignInButtonActive={setIsSignInButtonActive}
-                  />
-                }
-              />
-              <Route
-                path="/sign-in"
-                element={
-                  <SignIn
-                    input={input}
-                    setInput={setInput}
+                  <SignInSignUpContainer
+                    signInInput={signInInput}
+                    setSignInInput={setSignInInput}
                     setJwtToken={setJwtToken}
                     isSignInButtonActive={isSignInButtonActive}
                     setIsSignInButtonActive={setIsSignInButtonActive}
                     isSignUpButtonActive={isSignUpButtonActive}
                     setIsSignUpButtonActive={setIsSignUpButtonActive}
+                    signUpInput={signUpInput}
+                    setSignUpInput={setSignUpInput}
                   />
                 }
               />

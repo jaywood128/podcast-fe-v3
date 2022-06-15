@@ -70,8 +70,13 @@ const TitleLink = styled(Link)`
 
 const IconContainer = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  justify-content: start;
+  justify-content: space-around;
+  height: 30%;
+  width: 100%;
+  /* background-color: #03a9f4; */
+  /* background-color: #f75990; */
 `;
 
 export {
