@@ -3,6 +3,7 @@ import Layout from './components/Layout';
 import SignIn from './components/user-actions/sign-in/SignIn';
 import SignUp from './components/user-actions/sign-up/SignUp';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import ErrorBoundary from './components/errors/ErrorBoundary';
 
 import { createGlobalStyle } from 'styled-components';
 import SignInSignUpContainer from './components/authenticaton/SignInSignUpContainer';
@@ -56,17 +57,19 @@ const App = () => {
               <Route
                 path="/"
                 element={
-                  <SignInSignUpContainer
-                    signInInput={signInInput}
-                    setSignInInput={setSignInInput}
-                    setJwtToken={setJwtToken}
-                    isSignInButtonActive={isSignInButtonActive}
-                    setIsSignInButtonActive={setIsSignInButtonActive}
-                    isSignUpButtonActive={isSignUpButtonActive}
-                    setIsSignUpButtonActive={setIsSignUpButtonActive}
-                    signUpInput={signUpInput}
-                    setSignUpInput={setSignUpInput}
-                  />
+                  <ErrorBoundary>
+                    <SignInSignUpContainer
+                      signInInput={signInInput}
+                      setSignInInput={setSignInInput}
+                      setJwtToken={setJwtToken}
+                      isSignInButtonActive={isSignInButtonActive}
+                      setIsSignInButtonActive={setIsSignInButtonActive}
+                      isSignUpButtonActive={isSignUpButtonActive}
+                      setIsSignUpButtonActive={setIsSignUpButtonActive}
+                      signUpInput={signUpInput}
+                      setSignUpInput={setSignUpInput}
+                    />
+                  </ErrorBoundary>
                 }
               />
             </Routes>

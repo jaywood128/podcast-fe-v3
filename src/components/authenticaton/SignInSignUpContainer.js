@@ -31,8 +31,10 @@ const SignInSignUpContainer = ({
       return (
         <SignUpPage
           setJwtToken={setJwtToken}
-          setIsSignInButtonActive={isSignInButtonActive}
-          isSignUpButtonActive={isSignInButtonActive}
+          isSignInButtonActive={isSignInButtonActive}
+          setIsSignInButtonActive={setIsSignInButtonActive}
+          isSignUpButtonActive={isSignUpButtonActive}
+          setIsSignUpButtonActive={setIsSignUpButtonActive}
           signUpInput={signUpInput}
           setSignUpInput={setSignUpInput}
         />

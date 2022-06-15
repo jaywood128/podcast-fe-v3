@@ -103,13 +103,19 @@ const SignUpPage = ({
     }));
   };
   const onSignInButtonClick = () => {
-    setIsSignInButtonActive((isSignInButtonActive) => !isSignInButtonActive);
-    setIsSignUpButtonActive((isSignUpButtonActive) => !isSignUpButtonActive);
+    // setIsSignInButtonActive((isSignInButtonActive) => !isSignInButtonActive);
+    // setIsSignUpButtonActive((isSignUpButtonActive) => !isSignUpButtonActive);
+
+    if (!isSignInButtonActive && isSignUpButtonActive) {
+      console.log(isSignUpButtonActive);
+      setIsSignInButtonActive((isSignUnButtonActive) => !isSignUnButtonActive);
+      setIsSignUpButtonActive((isSignInButtonActive) => !isSignInButtonActive);
+    }
   };
 
   const onSignUpButtonClick = () => {
-    setIsSignUpButtonActive((isSignUpButtonActive) => !isSignUpButtonActive);
-    setIsSignInButtonActive((isSignInButtonActive) => !isSignInButtonActive);
+    // setIsSignUpButtonActive((isSignUpButtonActive) => !isSignUpButtonActive);
+    // setIsSignInButtonActive((isSignInButtonActive) => !isSignInButtonActive);
   };
 
   useEffect(() => {}, [passwordInputError]);
@@ -122,19 +128,18 @@ const SignUpPage = ({
           style={{
             display: 'flex',
             height: '15%',
-            width: '70%',
+            width: '100%',
             justifyContent: 'center',
             alignItems: 'center',
             fontSize: '20px',
           }}
         >
           <UserActionCard
-            // onClick={onSignInButtonClick}
+            onClick={onSignInButtonClick}
             style={{
-              backgroundColor: isSignInButtonActive ? ' #03a9f4' : '',
+              backgroundColor: isSignInButtonActive ? ' #052CA3' : '',
               color: isSignInButtonActive ? 'white' : '',
             }}
-            to="/sign-in"
           >
             Sign-in
           </UserActionCard>
@@ -142,10 +147,9 @@ const SignUpPage = ({
           <UserActionCard
             // onClick={onSignUpButtonClick}
             style={{
-              backgroundColor: isSignUpButtonActive ? ' #03a9f4' : '',
+              backgroundColor: isSignUpButtonActive ? ' #052CA3' : '',
               color: isSignUpButtonActive ? 'white' : '',
             }}
-            to="/sign-up"
           >
             Sign-up
           </UserActionCard>
@@ -195,7 +199,7 @@ const SignUpPage = ({
           />
         </InputWrapContainer>
         <SignInButtonContainer>
-          <SignInButtonStyles type="submit">Sign-up</SignInButtonStyles>
+          <SignInButtonStyles type="submit" />
         </SignInButtonContainer>
       </FormContainerStyles>
     </SignUpContainerStyles>

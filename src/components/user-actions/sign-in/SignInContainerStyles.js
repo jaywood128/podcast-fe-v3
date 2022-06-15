@@ -13,9 +13,9 @@ const SignInContainerStyles = styled.div`
 `;
 const InputWrapContainer = styled.div`
   display: flex;
-  width: 70%;
+  width: 72%;
   height: 12%;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   margin: 0px;
   padding: 0px;
@@ -26,10 +26,10 @@ const SignInButtonContainer = styled.div`
   justify-content: center;
   height: 9%;
   margin-top: 20px;
-  width: 70%;
+  width: 72%;
 `;
 
-const SignInButtonStyles = styled.button`
+const SignInButtonStyles = styled.input`
   border: none;
   padding: 10px 0px;
   background: none;
@@ -38,6 +38,7 @@ const SignInButtonStyles = styled.button`
   height: 100%;
   width: 100%;
   border-radius: 10px;
+  margin-left: 75px;
 
   :hover {
     -webkit-box-shadow: 3px 5px 24px #01579b; /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
@@ -54,6 +55,7 @@ const BreakStylesContainer = styled.div`
 
 const InputStyles = styled.input`
   height: 15%;
+  margin-left: 7px;
   width: 100%;
   font-size: 16px;
   padding: 20px;
@@ -81,7 +83,7 @@ const FormContainerStyles = styled.form`
   justify-content: center;
   background-color: #404040;
   align-items: center;
-  width: 26%;
+  width: 32%;
   height: 65%;
   flex-wrap: wrap;
   font-family: Roboto Mono;
